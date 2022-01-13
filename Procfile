@@ -1,1 +1,1 @@
-web: gunicorn chat_backend.wsgi --timeout 120 --keep-alive 120
+web: gunicorn chat_backend.wsgi --timeout 30 --keep-alive 30 --workers=3 --threads=3
