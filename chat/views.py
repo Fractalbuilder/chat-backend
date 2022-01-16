@@ -10,7 +10,7 @@ from .models import User, Message
 import datetime
 
 #originURL = 'http://127.0.0.1:3000'
-originURL = 'https://fb-chat00.herokuapp.com'
+originURL = 'http://fb-chat00.herokuapp.com'
 
 def index(request):
     return render(request, "general/index.html")
@@ -23,7 +23,7 @@ def chat_messages(request):
             yield 'data:' + json.dumps(messages) + '\n\n'
             print("Info sent")
             time.sleep(1)
-    #return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    
     response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
     response['Access-Control-Allow-Origin'] = originURL
     return response
