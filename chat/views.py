@@ -21,11 +21,6 @@ def chat_messages(request):
             print("Info sent")
             time.sleep(1)
     
-    """
-    response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
-    response['Access-Control-Allow-Origin'] = originURL
-    return response
-    """
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
 
 @csrf_exempt
@@ -39,28 +34,10 @@ def login(request):
 
         # Check if authentication successful
         if user is not None:
-            """
-            response = JsonResponse({"message": "User logged in", "userId": user.id, "username": username}, status=201)
-            response['Access-Control-Allow-Origin'] = 'https://fb-chat00.herokuapp.com'
-            response['Access-Control-Allow-Credentials'] = 'true'
-            return response
-            """
             return JsonResponse({"message": "User logged in", "userId": user.id, "username": username}, status=201)
         else:
-            """
-            response = JsonResponse({"message": "User not logged in"}, status=201)
-            response['Access-Control-Allow-Origin'] = originURL
-            response['Access-Control-Allow-Credentials'] = 'true'
-            return response
-            """
             return JsonResponse({"message": "User not logged in"}, status=201)
     else:
-        """
-        response = JsonResponse({"message": "Invalid opperation"}, status=201)
-        response['Access-Control-Allow-Origin'] = originURL
-        response['Access-Control-Allow-Credentials'] = 'true'
-        return response
-        """
         return JsonResponse({"message": "Invalid opperation"}, status=201)
 
 @csrf_exempt
@@ -72,11 +49,6 @@ def messages_api(request):
         text = data['text']
         date = datetime.datetime.now()        
         Message(userId=userId, username=username, text=text, datetime=str(date)).save()
-        """
-        response = JsonResponse({"message": "Message added."}, status=201)
-        response['Access-Control-Allow-Origin'] = 'https://fb-chat00.herokuapp.com'
-        return response
-        """
         return JsonResponse({"message": "Message added."}, status=201)
 
 @csrf_exempt
@@ -89,11 +61,6 @@ def register_user(request):
         confirmation = password
 
         if password != confirmation:
-            """
-            response = JsonResponse({"message": "Password doesn't match"}, status=201)
-            response['Access-Control-Allow-Origin'] = originURL
-            return response
-            """
             return JsonResponse({"message": "Password doesn't match"}, status=201)
 
         # Attempt to create new user
@@ -101,28 +68,8 @@ def register_user(request):
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            """
-            response = JsonResponse({"message": "User already taken"}, status=201)
-            response['Access-Control-Allow-Origin'] = originURL
-            response['Access-Control-Allow-Credentials'] = 'true'
-            return response
-            """
             return JsonResponse({"message": "User already taken"}, status=201)
 
-        """
-        response = JsonResponse({"message": "User added"}, status=201)
-        response['Access-Control-Allow-Origin'] = originURL
-        response['Access-Control-Allow-Credentials'] = 'true'
-        response.set_cookie('userId', user.id)
-        response.set_cookie('username', username)
-        return response
-        """
         return JsonResponse({"message": "User added", "userId": user.id, "username": username}, status=201)
     else:
-        """
-        response = JsonResponse({"message": "Invalid opperation"}, status=201)
-        response['Access-Control-Allow-Origin'] = originURL
-        response['Access-Control-Allow-Credentials'] = 'true'
-        return response
-        """
         return JsonResponse({"message": "Invalid opperation"}, status=201)
