@@ -29,6 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = False
+SESSION_COOKIE_HTTPONLY = False
 
 # Application definition
 
