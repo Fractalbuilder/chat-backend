@@ -117,7 +117,7 @@ def register_user(request):
         response.set_cookie('username', username)
         return response
         """
-        return JsonResponse({"message": "User added"}, status=201)
+        return JsonResponse({"message": "User added", "userId": user.id, "username": username}, status=201)
     else:
         """
         response = JsonResponse({"message": "Invalid opperation"}, status=201)
