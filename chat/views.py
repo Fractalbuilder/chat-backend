@@ -10,7 +10,7 @@ from .models import User, Message
 import datetime
 
 #originURL = 'http://127.0.0.1:3000'
-originURL = 'http://fb-chat00.herokuapp.com'
+originURL = 'https://fb-chat00.herokuapp.com'
 
 def index(request):
     return render(request, "general/index.html")
@@ -47,7 +47,7 @@ def login(request):
             return response
         else:
             response = JsonResponse({"message": "User not logged in"}, status=201)
-            response['Access-Control-Allow-Origin'] = originURL
+            response['Access-Control-Allow-Origin'] = 'https://fb-chat00.herokuapp.com'
             response['Access-Control-Allow-Credentials'] = 'true'
             return response
     else:
