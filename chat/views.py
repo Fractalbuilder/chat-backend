@@ -45,6 +45,7 @@ def login(request):
             #response.set_cookie('userId', user.id, { sameSite: 'none', secure: true })
             #response.set_cookie('username', username)
             response.set_cookie(key='userId', value=user.id, samesite='None', secure=True)
+            response.set_cookie(key='username', value=username, samesite='None', secure=True)
             return response
         else:
             response = JsonResponse({"message": "User not logged in"}, status=201)
