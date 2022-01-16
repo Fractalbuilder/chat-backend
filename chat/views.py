@@ -40,7 +40,7 @@ def login(request):
         # Check if authentication successful
         if user is not None:
             response = JsonResponse({"message": "User logged in"}, status=201)
-            response['Access-Control-Allow-Origin'] = 'https://fb-chat00.herokuapp.com/login'
+            response['Access-Control-Allow-Origin'] = 'https://fb-chat00.herokuapp.com'
             response['Access-Control-Allow-Credentials'] = 'true'
             #response.set_cookie('userId', user.id, { sameSite: 'none', secure: true })
             #response.set_cookie('username', username)
