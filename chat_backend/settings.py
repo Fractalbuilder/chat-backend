@@ -29,6 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = False
+SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 
 # Application definition
 
